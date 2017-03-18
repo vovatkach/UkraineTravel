@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Ukraine Travel</string>
     <string name="welcome_name">UKRAINE\nTRAVEL</string>
-
+    <string name="btn_go_to_select_city">Продовжити</string>
+    <string name="cb_not_to_show">Більше не показувати</string>
 </resources>

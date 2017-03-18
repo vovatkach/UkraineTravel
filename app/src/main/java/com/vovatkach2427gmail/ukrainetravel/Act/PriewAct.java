@@ -1,9 +1,11 @@
 package com.vovatkach2427gmail.ukrainetravel.Act;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ import com.synnapps.carouselview.ViewListener;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
 public class PriewAct extends AppCompatActivity {
+    Button btn_go_to_select_city;
     CarouselView carouselView;
     int [] imgs=
             {
@@ -36,8 +39,20 @@ public class PriewAct extends AppCompatActivity {
                 imageView.setImageResource(imgs[position]);
             }
         });
+
+        btn_go_to_select_city=(Button)findViewById(R.id.btn_go_to_select_city);
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        btn_go_to_select_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToSelectCity=new Intent(PriewAct.this,SelectCity.class);
+                startActivity(goToSelectCity);
+                overridePendingTransition(R.anim.in_left,R.anim.out_right);
+            }
+        });
+    }
 }

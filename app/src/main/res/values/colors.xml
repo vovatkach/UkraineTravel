@@ -2,5 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#283593</color>
-    <color name="colorAccent">#E91E63</color>
-</resources>
+    <color name="colorAccent">#e91e63</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="ln_priewact_not_to_show">#943f51b5</color>
+ </resources>
