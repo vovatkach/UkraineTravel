@@ -22,6 +22,6 @@
         android:padding="5dp"
         android:text=""
         android:textColor="@color/colorWhite"
-        android:textSize="40sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 </FrameLayout>
