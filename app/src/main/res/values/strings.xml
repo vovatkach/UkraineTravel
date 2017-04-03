@@ -3,4 +3,11 @@
     <string name="welcome_name">UKRAINE\nTRAVEL</string>
     <string name="btn_go_to_select_city">Продовжити</string>
     <string name="cb_not_to_show">Більше не показувати</string>
+    <string name="select_city">Вибір міста</string>
+    <string name="title_activity_main">Львів</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
