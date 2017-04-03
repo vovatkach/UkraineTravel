@@ -1,5 +1,6 @@
 package com.vovatkach2427gmail.ukrainetravel.Act;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -78,19 +79,16 @@ public class MainAct extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-       /* if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        switch (id)
+        {
+            case R.id.nav_exit:
+                finishAffinity();
+                break;
+            case R.id.nav_select_city:
+                Intent intent=new Intent(MainAct.this,SelectCity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_left,R.anim.out_right);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

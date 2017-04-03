@@ -23,8 +23,8 @@ public class SelectCity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_city_act);
-        int[] imgsLviv={R.drawable.lviv_img_1,R.drawable.lviv_img_2,R.drawable.lviv_img_3};
-        int [] imgsCity={R.drawable.city_img_1,R.drawable.city_img_2,R.drawable.city_img_3};
+     //   int[] imgsLviv={R.drawable.lviv_img_1,R.drawable.lviv_img_2,R.drawable.lviv_img_3};
+      //  int [] imgsCity={R.drawable.city_img_1,R.drawable.city_img_2,R.drawable.city_img_3};
 
         rvCities =(RecyclerView)findViewById(R.id.rvSelectCity);
         rvCities.setHasFixedSize(true);
