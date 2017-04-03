@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none"
+        android:id="@+id/group1">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_select_city"
+            android:icon="@drawable/nav_other_city"
+            android:title="@string/other_city" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
-
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/nav_weather"
+            android:title="@string/nav_weather" />
+        <item
+            android:id="@+id/nav_taxi"
+            android:icon="@drawable/nav_taxi"
+            android:title="@string/nav_taxi" />
+        <item
+            android:id="@+id/nav_near_places"
+            android:icon="@drawable/nav_near_me"
+            android:title="@string/near_place" />
+        <item
+            android:id="@+id/nav_build_trip"
+            android:icon="@drawable/nav_travel"
+            android:title="@string/build_trip" />
+    </group>
+    <group android:id="@+id/group3">
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/nav_setting"
+            android:title="@string/setting" />
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/nav_exit"
+            android:title="@string/exit" />
+    </group>
 </menu>

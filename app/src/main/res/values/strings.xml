@@ -10,4 +10,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="other_city">Інше місто</string>
+    <string name="nav_weather">Погода</string>
+    <string name="nav_taxi">Таксі</string>
+    <string name="near_place">Місця поблизу</string>
+    <string name="setting">Налаштування</string>
+    <string name="exit">Вийти</string>
+    <string name="build_trip">Побудувати екскурсію</string>
 </resources>

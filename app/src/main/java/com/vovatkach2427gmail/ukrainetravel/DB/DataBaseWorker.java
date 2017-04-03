@@ -48,6 +48,21 @@ public class DataBaseWorker {
         db.close();
         return cities;
     }
+    public City loadCity(int idCity)
+    {
+        City currectCity;
+        SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
+        Cursor cursor=db.query(Contact.TABLE_CITY.TABLE_NAME,null,Contact.TABLE_CITY.ID+" = ?",new String[]{Integer.toString(idCity)},null,null,null);
+        if(cursor.moveToFirst())
+        {
+            int idColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.ID);
+            int nameColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.NAME);
+            int coordinatesColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.COORDINATES);
+            int imgsColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.PICTURES);
+            currectCity=new City(cursor.getInt(idColIndex),cursor.getString(nameColIndex),cursor.getString(coordinatesColIndex),jsonToImgs(cursor.getString(imgsColIndex)));
+        }else currectCity=new City(1,"1","1",new int[]{1,1,1});
+        return currectCity;
+    }
     //------------------методи для налаштування
     public void addCity(String name, String coordinates,int[] imgs)
     {

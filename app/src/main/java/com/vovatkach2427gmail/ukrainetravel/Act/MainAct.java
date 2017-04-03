@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,35 +26,41 @@ import java.util.List;
 
 public class MainAct extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    int city_id=3;
+    int id_city=3;
+    City currectCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_act);
-        SharedPreferences preferences=getSharedPreferences("work",MODE_PRIVATE);
-        city_id=preferences.getInt("city_id",3);
+        ////----зчитування яке місто було вибрано
+        SharedPreferences preferences = getSharedPreferences("work", MODE_PRIVATE);
+        id_city = preferences.getInt("city_id", 3);
+        //-------пошук елементів
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setBackgroundResource(R.color.colorBlueGrey);
         navigationView.setNavigationItemSelectedListener(this);
+        //-----пошук header в navigation droiver і його елементів
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvNavHeaderCityName=(TextView) headerView.findViewById(R.id.tvNavDrowerName);
+        FrameLayout flNavHeader=(FrameLayout)headerView.findViewById(R.id.nav_header_frame_layot);
+        //------зчитування вибраного міста з БД
+        DataBaseWorker dataBaseWorker=new DataBaseWorker(MainAct.this);
+        currectCity=dataBaseWorker.loadCity(id_city);
+        dataBaseWorker.close();
+        //--------картинка міста і назва в меню Drover
+        flNavHeader.setBackgroundResource(currectCity.getImgs()[0]);
+        tvNavHeaderCityName.setText(currectCity.getName());
+        //-----------------------------------
     }
+
 
     @Override
     public void onBackPressed() {
@@ -65,35 +72,13 @@ public class MainAct extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+       /* if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -105,7 +90,8 @@ public class MainAct extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
