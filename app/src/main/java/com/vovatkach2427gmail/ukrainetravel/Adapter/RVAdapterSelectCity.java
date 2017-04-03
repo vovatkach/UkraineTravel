@@ -1,9 +1,9 @@
 package com.vovatkach2427gmail.ukrainetravel.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vovatkach2427gmail.ukrainetravel.Act.MainAct;
-import com.vovatkach2427gmail.ukrainetravel.Act.SelectCity;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
@@ -25,7 +23,7 @@ import java.util.List;
  */
 
 public class RVAdapterSelectCity extends RecyclerView.Adapter<RVAdapterSelectCity.CityViewHolder>{
-    private Context context;
+    private Activity activity;
     private List<City> cities;
     public static class CityViewHolder extends RecyclerView.ViewHolder
     {
@@ -39,9 +37,9 @@ public class RVAdapterSelectCity extends RecyclerView.Adapter<RVAdapterSelectCit
             imgCity=(ImageView)itemView.findViewById(R.id.ivImgCardCity);
         }
     }
-    public RVAdapterSelectCity(Context context, List<City> cities)
+    public RVAdapterSelectCity(Activity context, List<City> cities)
     {
-        this.context=context;
+        this.activity =context;
         this.cities=cities;
     }
     @Override
@@ -55,20 +53,21 @@ public class RVAdapterSelectCity extends RecyclerView.Adapter<RVAdapterSelectCit
     public void onBindViewHolder(CityViewHolder holder, final int position) {
         //-------------------------------------
         if(position==0) {
-        holder.tvCityName.setTextColor(context.getResources().getColor(R.color.colorAccent));
-        }else {holder.tvCityName.setTextColor(context.getResources().getColor(R.color.colorWhite));}
+        holder.tvCityName.setTextColor(activity.getResources().getColor(R.color.colorAccent));
+        }else {holder.tvCityName.setTextColor(activity.getResources().getColor(R.color.colorWhite));}
         //------------------------------------------
         holder.imgCity.setImageResource(cities.get(position).getImgs()[0]);
         holder.tvCityName.setText(cities.get(position).getName());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences=context.getSharedPreferences("work",Context.MODE_PRIVATE);
+                SharedPreferences preferences= activity.getSharedPreferences("work",Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putInt("city_id",cities.get(position).getId());
                 editor.commit();
-                Intent intent=new Intent(context, MainAct.class);
-                context.startActivity(intent);
+                Intent intent=new Intent(activity, MainAct.class);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.in_left,R.anim.out_right);
             }
         });
     }
