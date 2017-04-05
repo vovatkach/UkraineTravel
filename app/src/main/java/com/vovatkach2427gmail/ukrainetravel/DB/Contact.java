@@ -5,7 +5,7 @@ package com.vovatkach2427gmail.ukrainetravel.DB;
  */
 
 public class Contact {
-    public final static String DATABASE_NAME="mydb";
+    public final static String DATABASE_NAME="mydb.sqlite";
     public final static int DATABASE_VERSION=1;
     public final class TABLE_CITY {
         final public static String TABLE_NAME="city";
@@ -18,14 +18,14 @@ public class Contact {
     {
         final public static String TABLE_NAME="place";
          final public static String ID="id";
-         final public static String NAME="id_place";
+         final public static String NAME="name";
         final public static String TYPE="type";
         final public static String PICTURES="pictures";
         final public static String WEBSITE="website";
         final public static String PHONE="phone";
         final public static String AUDIO="audio";
         final public static String COORDINATES="coordinates";
-        final public static String ADDRESS="zddress";
+        final public static String ADDRESS="address";
         final public static String HOURS_OF_WORK="hours_of_work";
         final public static String DESCRIPTION="description";
         final public static String RATING="rating";

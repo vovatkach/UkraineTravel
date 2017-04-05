@@ -21,7 +21,7 @@
         android:fontFamily="casual"
         android:padding="5dp"
         android:text=""
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorAccent"
         android:textSize="25sp"
         android:textStyle="bold" />
 </FrameLayout>

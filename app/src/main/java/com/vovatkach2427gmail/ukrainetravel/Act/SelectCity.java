@@ -23,14 +23,14 @@ public class SelectCity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_city_act);
-     //   int[] imgsLviv={R.drawable.lviv_img_1,R.drawable.lviv_img_2,R.drawable.lviv_img_3};
-      //  int [] imgsCity={R.drawable.city_img_1,R.drawable.city_img_2,R.drawable.city_img_3};
+       //int[] imgsLviv={R.drawable.lviv_img_1,R.drawable.lviv_img_2,R.drawable.lviv_img_3};
+       // int [] imgsCity={R.drawable.city_img_1,R.drawable.city_img_2,R.drawable.city_img_3};
 
         rvCities =(RecyclerView)findViewById(R.id.rvSelectCity);
         rvCities.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(SelectCity.this);
         dataBaseWorker=new DataBaseWorker(SelectCity.this);
-      /*  dataBaseWorker.addCity("Львів","null",imgsLviv);
+     /*   dataBaseWorker.addCity("Львів","null",imgsLviv);
         dataBaseWorker.addCity("Івано-Франківськ","null",imgsCity);
         dataBaseWorker.addCity("Чернівці","null",imgsCity);
         dataBaseWorker.addCity("Ужгород","null",imgsCity);
@@ -49,7 +49,20 @@ public class SelectCity extends AppCompatActivity {
         dataBaseWorker.addCity("Трускавець","null",imgsCity);
         dataBaseWorker.addCity("Рівне","null",imgsCity);
         dataBaseWorker.addCity("Євпаторія","null",imgsCity);
-        dataBaseWorker.addCity("Ялта","null",imgsCity); */
+        dataBaseWorker.addCity("Ялта","null",imgsCity);
+        dataBaseWorker.addCity("Чорнобиль","null",imgsCity);
+        dataBaseWorker.addCity("Прип'ять","null",imgsCity);
+        dataBaseWorker.addCity("Умань","null",imgsCity);
+        dataBaseWorker.addCity("Запоріжжя","null",imgsCity);
+        dataBaseWorker.addCity("Полтава","null",imgsCity);
+        dataBaseWorker.addCity("Вінниця","null",imgsCity);
+        dataBaseWorker.addCity("Миколаїв","null",imgsCity);
+        dataBaseWorker.addCity("Черкаси","null",imgsCity);
+        dataBaseWorker.addCity("Житомир","null",imgsCity);
+        dataBaseWorker.addCity("Яремче","null",imgsCity);
+        dataBaseWorker.addCity("Кривий ріг","null",imgsCity);
+        dataBaseWorker.addCity("Суми","null",imgsCity);
+        */
         cities=dataBaseWorker.loadCities();
         dataBaseWorker.close();
         rvAdapterSelectCity=new RVAdapterSelectCity(SelectCity.this,cities);
