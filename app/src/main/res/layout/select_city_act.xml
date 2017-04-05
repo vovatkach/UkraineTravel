@@ -26,5 +26,4 @@
         android:id="@+id/rvSelectCity"
         android:background="@color/colorWhite">
     </android.support.v7.widget.RecyclerView>
-
 </LinearLayout>

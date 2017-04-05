@@ -64,34 +64,7 @@ public class DataBaseWorker {
         return currectCity;
     }
     //------------------методи для налаштування
-    public void addCity(String name, String coordinates,int[] imgs)
-    {
-        SQLiteDatabase db=myDataBaseHelper.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(Contact.TABLE_CITY.NAME,name);
-        contentValues.put(Contact.TABLE_CITY.COORDINATES,coordinates);
-        contentValues.put(Contact.TABLE_CITY.PICTURES,imgsToJson(imgs));
-        db.insert(Contact.TABLE_CITY.TABLE_NAME,null,contentValues);
-        db.close();
-    }
-    public void showAllCity(TextView textView)
-    {
-        SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
-        Cursor cursor=db.query(Contact.TABLE_CITY.TABLE_NAME,null,null,null,null,null,null);
-        if(cursor.moveToFirst())
-        {
-            String text="";
-            int idColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.ID);
-            int nameColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.NAME);
-            do
-            {
-                String line=(" "+Integer.toString(cursor.getInt(idColIndex))+" "+cursor.getString(nameColIndex)+" \n");
-                text+=line;
-            }while (cursor.moveToNext());
-            textView.setText(text);
-        }
-        db.close();
-    }
+
     //------------------допоміжні методи
     private String imgsToJson(int[] imgs)
     {

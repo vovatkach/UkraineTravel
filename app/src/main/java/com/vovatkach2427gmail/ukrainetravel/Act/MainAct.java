@@ -80,8 +80,8 @@ public class MainAct extends AppCompatActivity
                 finishAffinity();
                 break;
             case R.id.nav_select_city:
-                Intent intent=new Intent(MainAct.this,SelectCity.class);
-                startActivity(intent);
+                Intent intentGoSelectCity=new Intent(MainAct.this,SelectCity.class);
+                startActivity(intentGoSelectCity);
                 overridePendingTransition(R.anim.in_left,R.anim.out_right);
         }
 
