@@ -36,7 +36,6 @@ public class Contact {
         final public static String ID="id";
         final public static String NAME="name";
         final public static String NUMBER="number";
-        final public static String LOGOTYPE="logotype";
         final public static String ID_CITY="id_city";
     }
     public final static class TABLE_COMENT {

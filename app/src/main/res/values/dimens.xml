@@ -7,4 +7,10 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="app_bar_height_taxi">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="tv_taxi_title">26sp</dimen>
+    <dimen name="text_size_act_taxi_title">21sp</dimen>
+    <dimen name="nav_draver_title">21sp</dimen>
 </resources>

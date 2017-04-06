@@ -22,7 +22,7 @@ import com.vovatkach2427gmail.ukrainetravel.R;
 
 public class MainAct extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    int id_city=3;
+    int id_city=1;
     City currectCity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainAct extends AppCompatActivity
         setContentView(R.layout.main_act);
         ////----зчитування яке місто було вибрано
         SharedPreferences preferences = getSharedPreferences("work", MODE_PRIVATE);
-        id_city = preferences.getInt("city_id", 3);
+        id_city = preferences.getInt("city_id", 1);
         //-------пошук елементів
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,6 +83,12 @@ public class MainAct extends AppCompatActivity
                 Intent intentGoSelectCity=new Intent(MainAct.this,SelectCity.class);
                 startActivity(intentGoSelectCity);
                 overridePendingTransition(R.anim.in_left,R.anim.out_right);
+                break;
+            case R.id.nav_taxi:
+                Intent intentGoTaxi=new Intent(MainAct.this,TaxiAct.class);
+                startActivity(intentGoTaxi);
+                overridePendingTransition(R.anim.in_left,R.anim.out_right);
+                break;
         }
 
 

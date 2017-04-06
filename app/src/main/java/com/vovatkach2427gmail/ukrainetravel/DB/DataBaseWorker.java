@@ -66,7 +66,8 @@ public class DataBaseWorker {
     //------------------методи для налаштування
 
     //------------------допоміжні методи
-    private String imgsToJson(int[] imgs)
+    //-----------------робота з картинками
+    public static String imgsToJson(int[] imgs)
     {
         ImgsContainer container=new ImgsContainer(imgs);
         GsonBuilder builder=new GsonBuilder();
@@ -80,6 +81,22 @@ public class DataBaseWorker {
         ImgsContainer container=gson.fromJson(json,ImgsContainer.class);
         return container.getImgs();
     }
+    //--------------------робота з тел. номерами
+    public static String PhoneNumbersToJson(String[] numbers)
+    {
+        PhoneNumberContainer container=new PhoneNumberContainer(numbers);
+        GsonBuilder builder=new GsonBuilder();
+        Gson gson=builder.create();
+        return gson.toJson(container);
+    }
+    private String[] jsonToPhoneNumbers(String json)
+    {
+        GsonBuilder builder=new GsonBuilder();
+        Gson gson=builder.create();
+        PhoneNumberContainer container=gson.fromJson(json,PhoneNumberContainer.class);
+        return container.getNumbers();
+    }
+
 }
 class ImgsContainer
 {
@@ -91,5 +108,17 @@ class ImgsContainer
 
     public int[] getImgs() {
         return imgs;
+    }
+}
+class PhoneNumberContainer
+{
+    private String[] numbers;
+    PhoneNumberContainer(String[] arrayNumbers)
+    {
+        numbers=arrayNumbers;
+    }
+
+    public String[] getNumbers() {
+        return numbers;
     }
 }
