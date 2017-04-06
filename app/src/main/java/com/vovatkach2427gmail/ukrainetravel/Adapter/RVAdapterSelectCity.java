@@ -1,5 +1,7 @@
 package com.vovatkach2427gmail.ukrainetravel.Adapter;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

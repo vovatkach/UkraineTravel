@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#283593</color>
+    <color name="colorPrimary">#455A64</color>
+    <color name="colorPrimaryDark">#37474F</color>
     <color name="colorAccent">#e91e63</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="ln_priewact_not_to_show">#943f51b5</color>
+    <color name="ln_priewact_not_to_show">#263238</color>
     <color name="colorBlueGrey">#263238</color>
+    <color name="colorBlueGreay200">#ECEFF1</color>
+    <color name="colorX">#37474F</color>
  </resources>

@@ -36,7 +36,8 @@
         android:layout_height="22dp"
         android:layout_gravity="bottom"
         android:background="@color/ln_priewact_not_to_show"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:alpha="0.8">
 
         <CheckBox
             android:id="@+id/cb_not_to_show"

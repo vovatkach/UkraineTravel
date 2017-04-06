@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
+import com.vovatkach2427gmail.ukrainetravel.Model.Taxi;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
 import java.util.ArrayList;
@@ -62,6 +63,24 @@ public class DataBaseWorker {
             currectCity=new City(cursor.getInt(idColIndex),cursor.getString(nameColIndex),cursor.getString(coordinatesColIndex),jsonToImgs(cursor.getString(imgsColIndex)));
         }else currectCity=new City(1,"1","1",new int[]{1,1,1});
         return currectCity;
+    }
+    public List<Taxi> loadTaxis(int idCity)
+    {
+        ArrayList<Taxi> taxis=new ArrayList<>();
+        SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
+        Cursor cursor=db.query(Contact.TABLE_TAXI.TABLE_NAME,null,Contact.TABLE_TAXI.ID_CITY+" = ?",new String[]{Integer.toString(idCity)},null,null,null);
+        if(cursor.moveToFirst())
+        {
+           int idColIndex=cursor.getColumnIndex(Contact.TABLE_TAXI.ID);
+           int nameColIndex=cursor.getColumnIndex(Contact.TABLE_TAXI.NAME);
+           int numbersColIndex=cursor.getColumnIndex(Contact.TABLE_TAXI.NUMBER);
+           int idCityColIndex=cursor.getColumnIndex(Contact.TABLE_TAXI.ID_CITY);
+            do {
+                taxis.add(new Taxi(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToPhoneNumbers(cursor.getString(numbersColIndex)),cursor.getInt(idCityColIndex)));
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        return taxis;
     }
     //------------------методи для налаштування
 
