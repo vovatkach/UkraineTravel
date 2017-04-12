@@ -3,6 +3,8 @@ package com.vovatkach2427gmail.ukrainetravel.Act;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,8 +16,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
+import com.vovatkach2427gmail.ukrainetravel.Adapter.ViewPagerMainAdapter;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
 import com.vovatkach2427gmail.ukrainetravel.R;
@@ -31,6 +37,20 @@ public class MainAct extends AppCompatActivity
         ////----зчитування яке місто було вибрано
         SharedPreferences preferences = getSharedPreferences("work", MODE_PRIVATE);
         id_city = preferences.getInt("city_id", 1);
+        //------зчитування вибраного міста з БД
+        DataBaseWorker dataBaseWorker=new DataBaseWorker(MainAct.this);
+        currectCity=dataBaseWorker.loadCity(id_city);
+        dataBaseWorker.close();
+        //------csrouselView
+        CarouselView carouselViewCity=(CarouselView)findViewById(R.id.caroselViewCity);
+        carouselViewCity.setPageCount(currectCity.getImgs().length);
+        carouselViewCity.setImageListener(imageListenerCarouselViewCity);
+        //--------ініціалізація view pager і TabsLayout
+        ViewPager viewPagerMain=(ViewPager)findViewById(R.id.viewpager_main);
+        viewPagerMain.setAdapter(new ViewPagerMainAdapter(getSupportFragmentManager(),MainAct.this,id_city));
+        //-----
+        TabLayout tabLayoutMain=(TabLayout)findViewById(R.id.tabs_layout_main);
+        tabLayoutMain.setupWithViewPager(viewPagerMain);
         //-------пошук елементів
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,15 +64,10 @@ public class MainAct extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //-----пошук header в navigation droiver і його елементів
         View headerView = navigationView.getHeaderView(0);
-        TextView tvNavHeaderCityName=(TextView) headerView.findViewById(R.id.tvNavDrowerName);
         FrameLayout flNavHeader=(FrameLayout)headerView.findViewById(R.id.nav_header_frame_layot);
-        //------зчитування вибраного міста з БД
-        DataBaseWorker dataBaseWorker=new DataBaseWorker(MainAct.this);
-        currectCity=dataBaseWorker.loadCity(id_city);
-        dataBaseWorker.close();
         //--------картинка міста і назва в меню Drover
+        getSupportActionBar().setTitle(currectCity.getName());
         flNavHeader.setBackgroundResource(currectCity.getImgs()[0]);
-        tvNavHeaderCityName.setText(currectCity.getName());
         //-----------------------------------
 
     }
@@ -96,4 +111,10 @@ public class MainAct extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    ImageListener imageListenerCarouselViewCity=new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(currectCity.getImgs()[position]);
+        }
+    };
 }

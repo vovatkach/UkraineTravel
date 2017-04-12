@@ -8,4 +8,5 @@
     <color name="colorBlueGrey">#263238</color>
     <color name="colorBlueGreay200">#ECEFF1</color>
     <color name="colorX">#37474F</color>
- </resources>
+    <color name="colorBlueGrey50">#ECEFF1</color>
+</resources>

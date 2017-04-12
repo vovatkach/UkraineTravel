@@ -29,6 +29,7 @@ public class Contact {
         final public static String HOURS_OF_WORK="hours_of_work";
         final public static String DESCRIPTION="description";
         final public static String RATING="rating";
+        final public static String TOP="TOP";
         final public static String ID_CITY="id_city";
     }
     public final class TABLE_TAXI {

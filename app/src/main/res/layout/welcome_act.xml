@@ -12,10 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="sans-serif"
         android:text="@string/welcome_name"
         android:textAlignment="center"
-        android:visibility="gone"
         android:textAppearance="@android:style/TextAppearance.Material.WindowTitle"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:typeface="serif"
+        android:visibility="gone" />
 
 </FrameLayout>

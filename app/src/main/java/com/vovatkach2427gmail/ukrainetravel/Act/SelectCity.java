@@ -29,7 +29,11 @@ public class SelectCity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(SelectCity.this);
         dataBaseWorker=new DataBaseWorker(SelectCity.this);
         cities=dataBaseWorker.loadCities();
+      //  List<PlaceMain> placeMainModels=dataBaseWorker.loadPlaces(1,"Top");
+      //  Log.d("log",Integer.toString(placeMainModels.size()));
+     //   Log.d("log",placeMainModels.get(0).getName());
         dataBaseWorker.close();
+     //   Log.d("log",DataBaseWorker.imgsToJson(new int[]{R.drawable.v_img_place_1,R.drawable.v_img_place_2,R.drawable.v_img_place_3}));
         rvAdapterSelectCity=new RVAdapterSelectCity(SelectCity.this,cities);
 }
 

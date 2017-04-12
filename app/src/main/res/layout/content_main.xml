@@ -1,16 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.vovatkach2427gmail.ukrainetravel.Act.MainAct"
-    tools:showIn="@layout/app_bar_main"><![CDATA[
-    />
+    android:fitsSystemWindows="true"
+    tools:context="com.vovatkach2427gmail.ukrainetravel.Act.TaxiAct">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarCarouselViewCity"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-
-
-
-    ]]></android.support.constraint.ConstraintLayout>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout_act_taxi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/caroselViewCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:slideInterval="3000"
+                    app:fillColor="@color/colorAccent"
+                    app:pageColor="#00000000"
+                    app:radius="6dp"
+                    app:strokeColor="@color/colorWhite"
+                    app:strokeWidth="1dp"
+                    app:autoPlay="true"
+                    app:disableAutoPlayOnUserInteraction="true" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarCarouselView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs_layout_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabBackground="@color/colorPrimaryDark"
+                    app:tabMode="scrollable"
+                    app:layout_collapseMode="pin"
+                    />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.vovatkach2427gmail.ukrainetravel.Act.TaxiAct"
+        tools:showIn="@layout/taxi_act"
+        android:background="@color/colorBlueGrey50">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlueGrey50" />
+    </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

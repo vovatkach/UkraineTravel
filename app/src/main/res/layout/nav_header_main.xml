@@ -13,15 +13,5 @@
         android:background="@drawable/gradient_welcome"
         android:alpha="0.7">
     </FrameLayout>
-    <TextView
-        android:id="@+id/tvNavDrowerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:fontFamily="casual"
-        android:padding="5dp"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/nav_draver_title"
-        android:textStyle="bold" />
+
 </FrameLayout>

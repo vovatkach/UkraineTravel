@@ -7,10 +7,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vovatkach2427gmail.ukrainetravel.Act.TaxiAct"
     tools:showIn="@layout/taxi_act"
-    android:background="@color/colorBlueGreay200">
+    android:background="@color/colorBlueGrey50">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTaxi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorBlueGrey50">
     </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.NestedScrollView>

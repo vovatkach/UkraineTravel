@@ -1,17 +1,14 @@
 package com.vovatkach2427gmail.ukrainetravel.DB;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
+import com.vovatkach2427gmail.ukrainetravel.Model.PlaceMain;
 import com.vovatkach2427gmail.ukrainetravel.Model.Taxi;
-import com.vovatkach2427gmail.ukrainetravel.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +79,30 @@ public class DataBaseWorker {
         db.close();
         return taxis;
     }
+    public List<PlaceMain> loadPlaces(int idCity, String type)
+    {
+        ArrayList<PlaceMain> places=new ArrayList<>();
+        SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
+        Cursor cursor;
+        if (type=="ТОП"){
+        cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TOP},Contact.TABLE_TAXI.ID_CITY+" = ? AND "+Contact.TABLE_PLACE.TOP+" = ?",new String[]{Integer.toString(idCity),Integer.toString(1)},null,null,null);
+        }else
+            {
+                cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TOP},Contact.TABLE_TAXI.ID_CITY+" = ? AND "+Contact.TABLE_PLACE.TYPE+" = ?",new String[]{Integer.toString(idCity),type},null,null,null);
+
+            }
+        if (cursor.moveToFirst()) {
+            int idColIndex = cursor.getColumnIndex(Contact.TABLE_PLACE.ID);
+            int nameColIndex = cursor.getColumnIndex(Contact.TABLE_PLACE.NAME);
+            int imgColIndex = cursor.getColumnIndex(Contact.TABLE_PLACE.PICTURES);
+            int topColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TOP);
+            do {
+                places.add(new PlaceMain(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToImgs(cursor.getString(imgColIndex)),cursor.getInt(topColIndex)));
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return places;
+        }
     //------------------методи для налаштування
 
     //------------------допоміжні методи
