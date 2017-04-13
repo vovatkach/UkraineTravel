@@ -25,6 +25,8 @@ import java.util.List;
  */
 
 public class RVAdapterSelectCity extends RecyclerView.Adapter<RVAdapterSelectCity.CityViewHolder>{
+   // private static final Integer CITY_TYPE = 1;
+   // private static final Integer MAP_TYPE = 2;
     private Activity activity;
     private List<City> cities;
     public static class CityViewHolder extends RecyclerView.ViewHolder
@@ -83,4 +85,10 @@ public class RVAdapterSelectCity extends RecyclerView.Adapter<RVAdapterSelectCit
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+    /*
+    @Override
+    public int getItemViewType(int position) {
+        return cities.get(position) instanceof City ? CITY_TYPE : MAP_TYPE;
+    }
+    */
 }

@@ -3,6 +3,7 @@
     package="com.vovatkach2427gmail.ukrainetravel">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -47,6 +48,16 @@
         </activity>
         <activity
             android:name=".Act.TaxiAct"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Act.InfoPlaceAct"
+            android:label="@string/title_activity_info_place"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

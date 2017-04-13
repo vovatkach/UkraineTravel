@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
+import com.vovatkach2427gmail.ukrainetravel.Model.Place;
 import com.vovatkach2427gmail.ukrainetravel.Model.PlaceMain;
 import com.vovatkach2427gmail.ukrainetravel.Model.Taxi;
 
@@ -103,6 +104,31 @@ public class DataBaseWorker {
         db.close();
         return places;
         }
+    public Place loadPlace(int id_place)
+    {
+        Place currectPlace;
+        SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
+        Cursor cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,null,Contact.TABLE_PLACE.ID+" =?",new String[]{Integer.toString(id_place)},null,null,null);
+        if(cursor.moveToFirst())
+        {
+            int idColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ID);
+            int NameColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.NAME);
+            int TypeColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TYPE);
+            int WebsiteColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.WEBSITE);
+            int PicturesColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.PICTURES);
+            int TopColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TOP);
+            int AddressColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ADDRESS);
+            int AudioColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.AUDIO);
+            int CoordinatesColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.COORDINATES);
+            int DescriptionColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.DESCRIPTION);
+            int HoursOfWorkColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.HOURS_OF_WORK);
+            int CityIdColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ID_CITY);
+            int PhoneColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.PHONE);
+            int RatingColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.RATING);
+            currectPlace=new Place(cursor.getInt(idColIndex),cursor.getString(NameColIndex),cursor.getString(TypeColIndex),jsonToImgs(cursor.getString(PicturesColIndex)),cursor.getString(WebsiteColIndex),cursor.getString(PhoneColIndex),cursor.getString(AudioColIndex),cursor.getString(CoordinatesColIndex),cursor.getString(AddressColIndex),cursor.getString(HoursOfWorkColIndex),cursor.getString(DescriptionColIndex),cursor.getInt(RatingColIndex),cursor.getInt(CityIdColIndex),cursor.getInt(TopColIndex));
+        }else currectPlace=new Place(1,"place","", new int[]{}, "", "", "", "", "", "", "",1,1,1);
+        return currectPlace;
+    }
     //------------------методи для налаштування
 
     //------------------допоміжні методи

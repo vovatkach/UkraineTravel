@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vovatkach2427gmail.ukrainetravel.Act.MainAct;
 import com.vovatkach2427gmail.ukrainetravel.Adapter.RVAdapterMainPlace;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
 import com.vovatkach2427gmail.ukrainetravel.Model.PlaceMain;
@@ -54,7 +55,7 @@ public class FragmentRecyclerViewPlaces extends Fragment {
         rvPlace.setHasFixedSize(true);
         LinearLayoutManager llv=new LinearLayoutManager(getActivity());
         rvPlace.setLayoutManager(llv);
-        RVAdapterMainPlace adapter=new RVAdapterMainPlace(places);
+        RVAdapterMainPlace adapter=new RVAdapterMainPlace(getActivity(),places);
         rvPlace.setAdapter(adapter);
         return view;
     }
