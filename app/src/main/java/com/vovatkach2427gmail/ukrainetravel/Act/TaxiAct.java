@@ -74,11 +74,11 @@ public class TaxiAct extends AppCompatActivity {
         ivNavigationBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObjectAnimator animatorX=ObjectAnimator.ofFloat(ivNavigationBack,View.SCALE_X,1.0f,0.9f,1.1f);
-                ObjectAnimator animatorY=ObjectAnimator.ofFloat(ivNavigationBack,View.SCALE_Y,1.0f,0.9f,1.1f);
+                ObjectAnimator animatorX=ObjectAnimator.ofFloat(ivNavigationBack,View.SCALE_X,1.0f, 0.85f, 1.15f, 1.0f);
+                ObjectAnimator animatorY=ObjectAnimator.ofFloat(ivNavigationBack,View.SCALE_Y,1.0f, 0.85f, 1.15f, 1.0f);
                 AnimatorSet animatorSet=new AnimatorSet();
                 animatorSet.play(animatorX).with(animatorY);
-                animatorSet.setDuration(85);
+                animatorSet.setDuration(50);
                 animatorSet.start();
                 animatorSet.addListener(new AnimatorListenerAdapter() {
                     @Override

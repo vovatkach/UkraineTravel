@@ -56,8 +56,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Act.InfoPlaceAct"
-            android:label="@string/title_activity_info_place"
+            android:name=".Act.PlaceAct"
+            android:label="@string/title_activity_place"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

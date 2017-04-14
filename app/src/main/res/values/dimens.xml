@@ -13,4 +13,9 @@
     <dimen name="tv_taxi_title">26sp</dimen>
     <dimen name="text_size_act_taxi_title">21sp</dimen>
     <dimen name="nav_draver_title">21sp</dimen>
+    <dimen name="call_margin">10dp</dimen>
+    <dimen name="toolbar_height_place_act">150dp</dimen>
+    <dimen name="place_act_actionbar">250dp</dimen>
+    <dimen name="act_place_toolbar_height">100dp</dimen>
+    <dimen name="text_sise_act_place_caption">16sp</dimen>
 </resources>

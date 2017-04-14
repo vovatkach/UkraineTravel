@@ -12,8 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vovatkach2427gmail.ukrainetravel.Act.InfoPlaceAct;
-import com.vovatkach2427gmail.ukrainetravel.Act.MainAct;
+import com.vovatkach2427gmail.ukrainetravel.Act.PlaceAct;
 import com.vovatkach2427gmail.ukrainetravel.Model.PlaceMain;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
@@ -64,7 +63,7 @@ public class RVAdapterMainPlace extends RecyclerView.Adapter<RVAdapterMainPlace.
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putInt("place_id",places.get(position).getId());
                 editor.commit();
-                Intent intent=new Intent(activity, InfoPlaceAct.class);
+                Intent intent=new Intent(activity, PlaceAct.class);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.in_left,R.anim.out_right);
 
