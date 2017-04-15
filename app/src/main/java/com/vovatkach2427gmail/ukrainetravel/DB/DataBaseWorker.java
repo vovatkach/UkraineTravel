@@ -40,7 +40,7 @@ public class DataBaseWorker {
             int imgsColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.PICTURES);
             do
             {
-                cities.add(new City(cursor.getInt(idColIndex),cursor.getString(nameColIndex),cursor.getString(coordinatesColIndex),jsonToImgs(cursor.getString(imgsColIndex))));
+                cities.add(new City(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToCoordinates(cursor.getString(coordinatesColIndex)),jsonToImgs(cursor.getString(imgsColIndex))));
 
             }while (cursor.moveToNext());
         }
@@ -58,8 +58,8 @@ public class DataBaseWorker {
             int nameColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.NAME);
             int coordinatesColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.COORDINATES);
             int imgsColIndex=cursor.getColumnIndex(Contact.TABLE_CITY.PICTURES);
-            currectCity=new City(cursor.getInt(idColIndex),cursor.getString(nameColIndex),cursor.getString(coordinatesColIndex),jsonToImgs(cursor.getString(imgsColIndex)));
-        }else currectCity=new City(1,"1","1",new int[]{1,1,1});
+            currectCity=new City(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToCoordinates(cursor.getString(coordinatesColIndex)),jsonToImgs(cursor.getString(imgsColIndex)));
+        }else currectCity=new City(1,"1",new double[]{},new int[]{});
         return currectCity;
     }
     public List<Taxi> loadTaxis(int idCity)
@@ -147,6 +147,21 @@ public class DataBaseWorker {
         ImgsContainer container=gson.fromJson(json,ImgsContainer.class);
         return container.getImgs();
     }
+    //-------------------робота з координатами
+    public static String coordinatesToJson(double[] coordinates)
+    {
+        CoordinatesContainer container=new CoordinatesContainer(coordinates);
+        GsonBuilder builder=new GsonBuilder();
+        Gson gson=builder.create();
+        return gson.toJson(container);
+    }
+    private double[] jsonToCoordinates(String json)
+    {
+        GsonBuilder builder=new GsonBuilder();
+        Gson gson=builder.create();
+        CoordinatesContainer container=gson.fromJson(json,CoordinatesContainer.class);
+        return container.getCoordinates();
+    }
     //--------------------робота з тел. номерами
     public static String PhoneNumbersToJson(String[] numbers)
     {
@@ -164,6 +179,7 @@ public class DataBaseWorker {
     }
 
 }
+//-----------------------
 class ImgsContainer
 {
     private int[] imgs;
@@ -176,6 +192,20 @@ class ImgsContainer
         return imgs;
     }
 }
+//-------------------------
+class CoordinatesContainer
+{
+    private double[] coordinates;
+    CoordinatesContainer(double[] arrayCoordinates)
+    {
+        coordinates=arrayCoordinates;
+    }
+
+    public double[] getCoordinates() {
+        return coordinates;
+    }
+}
+//-----------------------
 class PhoneNumberContainer
 {
     private String[] numbers;

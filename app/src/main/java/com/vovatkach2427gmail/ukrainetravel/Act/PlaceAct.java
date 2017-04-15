@@ -21,12 +21,14 @@ import android.widget.TextView;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
+import com.vovatkach2427gmail.ukrainetravel.Model.City;
 import com.vovatkach2427gmail.ukrainetravel.Model.Place;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
 public class PlaceAct extends AppCompatActivity {
     int place_id=1;
     Place currectPlace;
+    City currectCity;
     ImageView ivNavigationBack;
     ImageView ivCall;
     ImageView ivWebsite;
@@ -41,9 +43,11 @@ public class PlaceAct extends AppCompatActivity {
         //--------------зчитування id вибраного місця
         SharedPreferences preferences=getSharedPreferences("work",MODE_PRIVATE);
         place_id=preferences.getInt("place_id",1);
-        //----------------зчитування вибраного місця
+        //----------------зчитування вибраного місця і міста
         DataBaseWorker db = new DataBaseWorker(PlaceAct.this);
         currectPlace=db.loadPlace(place_id);
+        currectCity=db.loadCity(currectPlace.getId_City());
+        db.close();
         //--------------Робота з тулбаром
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -126,10 +130,6 @@ public class PlaceAct extends AppCompatActivity {
             ivWebsite.setEnabled(false);
             ivWebsite.setAlpha(0.2f);
         }
-        if(currectPlace.getCoordinates().equals("no")) {
-            ivMap.setEnabled(false);
-            ivMap.setAlpha(0.2f);
-        }
         //---------------------------------------
     }
     View.OnClickListener onClickListenerCallWebsiteAudioMap =new View.OnClickListener() {
@@ -171,6 +171,11 @@ public class PlaceAct extends AppCompatActivity {
                                     mediaPlayer=null;
                                     ivAudio.setImageResource(R.drawable.x_headphones);
                                 }
+                            break;
+                        case R.id.iv_map_place:
+                            String uri = "geo:0,0?q="+currectCity.getName()+"+"+currectPlace.getName();
+                            Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                            startActivity(mapIntent);
                             break;
                     }
                 }
