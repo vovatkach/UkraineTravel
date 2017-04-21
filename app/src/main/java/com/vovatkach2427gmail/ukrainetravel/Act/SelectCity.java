@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.vovatkach2427gmail.ukrainetravel.Adapter.RVAdapterSelectCity;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
+import com.vovatkach2427gmail.ukrainetravel.MyLocationListener;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
 import java.util.Collections;
@@ -35,20 +36,25 @@ public class SelectCity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_city_act);
-        locationUser=getLocationUser();
+        locationUser= MyLocationListener.getUserLocation();
         rvCities = (RecyclerView) findViewById(R.id.rvSelectCity);
         rvCities.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(SelectCity.this);
         dataBaseWorker = new DataBaseWorker(SelectCity.this);
         cities = dataBaseWorker.loadCities();
         dataBaseWorker.close();
-        locationUser=getLocationUser();
+        // Log.d("myLog",DataBaseWorker.imgsToJson(new int[]{R.drawable.lviv_img_1,R.drawable.lviv_img_2,R.drawable.lviv_img_3}));
+        // Log.d("myLog",DataBaseWorker.imgsToJson(new int[]{R.drawable.v_img_place_1,R.drawable.v_img_place_2,R.drawable.v_img_place_3}));
         //----перевірка чи можна сортувати
         if(locationUser!=null)
         {
+            Log.d("myLog","є локація");
             for (City city:cities){city.setDistanceToUser(locationUser);}
             Collections.sort(cities,City.COMPARATOR_BY_DISTANT_TO_USER);
-        }
+        }else
+            {
+                Collections.sort(cities,City.COMPARATOR_BY_NAME);
+            }
         rvAdapterSelectCity = new RVAdapterSelectCity(SelectCity.this, cities);
     }
 
@@ -57,30 +63,6 @@ public class SelectCity extends AppCompatActivity {
         super.onResume();
         rvCities.setLayoutManager(layoutManager);
         rvCities.setAdapter(rvAdapterSelectCity);
-    }
-
-    private Location getLocationUser() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast toastError=Toast.makeText(this,"Не вдалося получити дані про ваше місцезнаходження.\n Виключений інтернет і GPS.",Toast.LENGTH_SHORT);
-            toastError.show();
-        }
-        Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        Location locationNETWORK=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if((locationGPS!=null)&&(locationNETWORK!=null))
-        {
-            if(locationNETWORK.getTime()>locationGPS.getTime())return locationNETWORK;else return locationGPS;
-        }else
-            if(locationNETWORK!=null)
-            {
-                return locationNETWORK;
-            }else
-                if(locationGPS!=null)
-                {
-                    return locationGPS;
-                }else return null;
-
-
     }
 }
 

@@ -104,7 +104,17 @@ public class PlaceAct extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        Intent intent=new Intent(PlaceAct.this, MainAct.class);
+                        Intent intent;
+                        switch (getIntent().getStringExtra("father"))
+                        {
+                            case "MainPlaceActivity":
+                                intent=new Intent(PlaceAct.this, MainAct.class);
+                                break;
+                            case "NearPlaceActivity":
+                                intent=new Intent(PlaceAct.this, NearPlaceAct.class);
+                                break;
+                            default:intent=new Intent(PlaceAct.this, MainAct.class);
+                        }
                         startActivity(intent);
                         overridePendingTransition(R.anim.in_left,R.anim.out_right);
                     }

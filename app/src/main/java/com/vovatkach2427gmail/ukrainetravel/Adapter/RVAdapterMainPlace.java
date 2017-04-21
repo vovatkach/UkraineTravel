@@ -64,6 +64,7 @@ public class RVAdapterMainPlace extends RecyclerView.Adapter<RVAdapterMainPlace.
                 editor.putInt("place_id",places.get(position).getId());
                 editor.commit();
                 Intent intent=new Intent(activity, PlaceAct.class);
+                intent.putExtra("father","MainPlaceActivity");
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.in_left,R.anim.out_right);
 

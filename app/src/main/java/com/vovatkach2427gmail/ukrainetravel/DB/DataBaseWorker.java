@@ -86,24 +86,47 @@ public class DataBaseWorker {
         SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
         Cursor cursor;
         if (type=="ТОП"){
-        cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TOP},Contact.TABLE_TAXI.ID_CITY+" = ? AND "+Contact.TABLE_PLACE.TOP+" = ?",new String[]{Integer.toString(idCity),Integer.toString(1)},null,null,null);
+        cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TOP,Contact.TABLE_PLACE.TYPE, Contact.TABLE_PLACE.ADDRESS},Contact.TABLE_TAXI.ID_CITY+" = ? AND "+Contact.TABLE_PLACE.TOP+" = ?",new String[]{Integer.toString(idCity),Integer.toString(1)},null,null,null);
         }else
             {
-                cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TOP},Contact.TABLE_TAXI.ID_CITY+" = ? AND "+Contact.TABLE_PLACE.TYPE+" = ?",new String[]{Integer.toString(idCity),type},null,null,null);
+                cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TOP,Contact.TABLE_PLACE.TYPE,Contact.TABLE_PLACE.ADDRESS},Contact.TABLE_TAXI.ID_CITY+" = ? AND "+Contact.TABLE_PLACE.TYPE+" = ?",new String[]{Integer.toString(idCity),type},null,null,null);
 
             }
         if (cursor.moveToFirst()) {
             int idColIndex = cursor.getColumnIndex(Contact.TABLE_PLACE.ID);
             int nameColIndex = cursor.getColumnIndex(Contact.TABLE_PLACE.NAME);
+            int typeColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TYPE);
             int imgColIndex = cursor.getColumnIndex(Contact.TABLE_PLACE.PICTURES);
             int topColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TOP);
+            int addressColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ADDRESS);
+
             do {
-                places.add(new PlaceMain(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToImgs(cursor.getString(imgColIndex)),cursor.getInt(topColIndex)));
+                places.add(new PlaceMain(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToImgs(cursor.getString(imgColIndex)),cursor.getInt(topColIndex),cursor.getString(typeColIndex),cursor.getString(addressColIndex)));
             } while (cursor.moveToNext());
         }
         db.close();
         return places;
         }
+    public List<PlaceMain> loadPlaces(int idCity)
+    {
+        ArrayList<PlaceMain> places=new ArrayList<>();
+        SQLiteDatabase db=myDataBaseHelper.getReadableDatabase();
+        Cursor cursor=db.query(Contact.TABLE_PLACE.TABLE_NAME,new String[]{Contact.TABLE_PLACE.ID,Contact.TABLE_PLACE.NAME,Contact.TABLE_PLACE.TOP,Contact.TABLE_PLACE.PICTURES,Contact.TABLE_PLACE.TYPE,Contact.TABLE_PLACE.ADDRESS},Contact.TABLE_TAXI.ID_CITY+" = ?",new String[]{Integer.toString(idCity)},null,null,null);
+        if(cursor.moveToFirst())
+        {
+           int idColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ID);
+           int nameColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.NAME);
+           int typeColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TYPE);
+           int imgColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.PICTURES);
+           int topColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TOP);
+            int addressColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ADDRESS);
+           do {
+               places.add(new PlaceMain(cursor.getInt(idColIndex),cursor.getString(nameColIndex),jsonToImgs(cursor.getString(imgColIndex)),cursor.getInt(topColIndex),cursor.getString(typeColIndex),cursor.getString(addressColIndex)));
+
+           }while (cursor.moveToNext());
+        }
+        return places;
+    }
     public Place loadPlace(int id_place)
     {
         Place currectPlace;

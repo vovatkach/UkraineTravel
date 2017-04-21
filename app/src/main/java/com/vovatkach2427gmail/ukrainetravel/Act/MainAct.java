@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,10 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -102,6 +99,11 @@ public class MainAct extends AppCompatActivity
             case R.id.nav_taxi:
                 Intent intentGoTaxi=new Intent(MainAct.this,TaxiAct.class);
                 startActivity(intentGoTaxi);
+                overridePendingTransition(R.anim.in_left,R.anim.out_right);
+                break;
+            case R.id.nav_near_places:
+                Intent intentGoToNearPlace=new Intent(MainAct.this,NearPlaceAct.class);
+                startActivity(intentGoToNearPlace);
                 overridePendingTransition(R.anim.in_left,R.anim.out_right);
                 break;
         }

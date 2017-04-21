@@ -10,4 +10,5 @@
     <color name="colorX">#37474F</color>
     <color name="colorBlueGrey50">#ECEFF1</color>
     <color name="colorCaptionTextActPlace">#90A4AE</color>
+    <color name="colorBlueGrey100">#CFD8DC</color>
 </resources>

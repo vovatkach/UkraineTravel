@@ -60,6 +60,13 @@ public class City {
             return Float.compare(city1.distanceToUser,city2.distanceToUser);
         }
     };
+    public static final Comparator<City> COMPARATOR_BY_NAME = new Comparator<City>() {
+
+        public int compare(City city1, City city2) {
+           // return Float.compare(city1.distanceToUser,city2.distanceToUser);
+            return city1.getName().compareTo(city2.getName());
+        }
+    };
 
 
 }

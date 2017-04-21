@@ -15,6 +15,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
+import com.vovatkach2427gmail.ukrainetravel.MyLocationListener;
 import com.vovatkach2427gmail.ukrainetravel.R;
 
 public class WelcomeAct extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class WelcomeAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_act);
         tvWelcome=(TextView)findViewById(R.id.tvWelcomeName);
+        //-----включаємо оновлення локації
+        MyLocationListener.SetUpLocationListener(WelcomeAct.this);
     }
 
     @Override

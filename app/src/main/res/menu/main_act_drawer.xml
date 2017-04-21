@@ -20,10 +20,6 @@
             android:id="@+id/nav_near_places"
             android:icon="@drawable/nav_near_me"
             android:title="@string/near_place" />
-        <item
-            android:id="@+id/nav_build_trip"
-            android:icon="@drawable/nav_travel"
-            android:title="@string/build_trip" />
     </group>
     <group android:id="@+id/group3">
         <item
