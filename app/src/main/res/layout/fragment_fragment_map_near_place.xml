@@ -8,13 +8,38 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tvMapNearPlaceError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/not_places"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+        <Button
+            android:id="@+id/btnMapNearPlaceError"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Оновити"
+            android:visibility="invisible" />
+    </LinearLayout>
     <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
         android:id="@+id/progressNearPlaceMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:radius="5dp"
-        android:color="@color/colorAccent"
+        android:color="@color/colorWhite"
         app:dd_numDots="4"
         app:dd_scaleMultiplier="1.5"
         app:dd_animationDuration="500"

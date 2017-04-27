@@ -9,6 +9,7 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -58,16 +59,16 @@ public class PlaceMain {
     public String getAddress() {
         return Address;
     }
-    public void setDistanceToUser(Location userLocation, Context context)
+    public void setDistanceToUser(Location userLocation, Context context, String cityName)
     {
         distanceToUser=null;
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         Location locationPlace=null;
         try {
-            address = coder.getFromLocationName("місто Львів "+Address,1);
+            address = coder.getFromLocationName(cityName+" "+Address,1);
            if (address.isEmpty()) {
-               address = coder.getFromLocationName("місто Львів "+Name,1);
+               address = coder.getFromLocationName(cityName+" "+Name,1);
                 if(address.isEmpty()){return;}
 
             }
@@ -91,4 +92,11 @@ public class PlaceMain {
     public LatLng getCoordinates() {
         return coordinates;
     }
+    ///-----для поірвняння
+    public static final Comparator<PlaceMain> COMPARATOR_BY_DISTANCE_TO_USER=new Comparator<PlaceMain>() {
+        @Override
+        public int compare(PlaceMain o1, PlaceMain o2) {
+            return o1.getDistanceToUser()-o2.getDistanceToUser();
+        }
+    };
 }

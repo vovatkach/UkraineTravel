@@ -12,17 +12,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vovatkach2427gmail.ukrainetravel.Act.PlaceAct;
 import com.vovatkach2427gmail.ukrainetravel.Adapter.RVAdapterNearPlaceList;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
+import com.vovatkach2427gmail.ukrainetravel.Model.City;
 import com.vovatkach2427gmail.ukrainetravel.Model.PlaceMain;
 import com.vovatkach2427gmail.ukrainetravel.MyLocationListener;
 import com.vovatkach2427gmail.ukrainetravel.R;
 import com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,6 +38,7 @@ public class FragmentListNearPlace extends FragmentNearPlace {
     //-------------
     private int cityId;
     private int radius;
+    private City currectCity;
     private List<PlaceMain> allPlaces;
     private List<PlaceMain> nearPlaces;
     //-------------
@@ -41,6 +46,7 @@ public class FragmentListNearPlace extends FragmentNearPlace {
     LinearLayoutManager layoutManager;
     RVAdapterNearPlaceList adapter;
     TextView tvNotNearPlaces;
+    Button btnError;
     //------------
     DilatingDotsProgressBar progressBar;
 
@@ -59,19 +65,6 @@ public class FragmentListNearPlace extends FragmentNearPlace {
         super.onCreate(savedInstanceState);
         cityId =getArguments().getInt(ARG_ID_CITY,1);
         radius =getArguments().getInt(ARG_RADIUS,500);
-      /*  Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                cityId =getArguments().getInt(ARG_ID_CITY,1);
-                radius =getArguments().getInt(ARG_RADIUS,500);
-                allPlaces =new ArrayList<>();
-                DataBaseWorker dataBaseWorker=new DataBaseWorker(getContext());
-                allPlaces =dataBaseWorker.loadPlaces(cityId);
-                dataBaseWorker.close();
-                nearPlaces=new ArrayList<>();
-            }
-        });
-        thread.start();*/
     }
 
     @Override
@@ -81,6 +74,7 @@ public class FragmentListNearPlace extends FragmentNearPlace {
         View view=inflater.inflate(R.layout.fragment_fragment_list_near_place, container, false);
         recyclerView=(RecyclerView)view.findViewById(R.id.rvNearPlaceList);
         tvNotNearPlaces=(TextView)view.findViewById(R.id.tv_is_not_places);
+        btnError=(Button)view.findViewById(R.id.btnListNearPlaceError);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -93,6 +87,12 @@ public class FragmentListNearPlace extends FragmentNearPlace {
     public void onResume() {
         super.onResume();
         showData();
+        btnError.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showData();
+            }
+        });
     }
 
     public void setRadiusAndUpdate(int radius)
@@ -109,6 +109,7 @@ public class FragmentListNearPlace extends FragmentNearPlace {
                     @Override
                     public void run() {
                         tvNotNearPlaces.setVisibility(View.INVISIBLE);
+                        btnError.setVisibility(View.INVISIBLE);
                         progressBar.showNow();
                     }
                 });
@@ -128,6 +129,12 @@ public class FragmentListNearPlace extends FragmentNearPlace {
                     nearPlaces = new ArrayList<>();
               //      Log.d("myLog", "створюю близькі");
                 }
+                if (currectCity==null)
+                {
+                    DataBaseWorker dataBaseWorker=new DataBaseWorker(getContext());
+                    currectCity=dataBaseWorker.loadCity(cityId);
+                    dataBaseWorker.close();
+                }
                 //-----
             //    Log.d("myLog", "шукаю");
                 selectNearPlaces();
@@ -138,6 +145,7 @@ public class FragmentListNearPlace extends FragmentNearPlace {
                         if(nearPlaces.isEmpty())
                         {
                             tvNotNearPlaces.setVisibility(View.VISIBLE);
+                            btnError.setVisibility(View.VISIBLE);
                         }else
                         {
                             tvNotNearPlaces.setVisibility(View.INVISIBLE);
@@ -154,21 +162,33 @@ public class FragmentListNearPlace extends FragmentNearPlace {
     //----вибірка місць які входять в радіус
     private void selectNearPlaces()
     {
-       // if(nearPlaces!=null){
         if(!nearPlaces.isEmpty())
         {
             nearPlaces.clear();
         }
-    //}
-        for (int i=0;i<allPlaces.size();i++)
-        {
-            allPlaces.get(i).setDistanceToUser(MyLocationListener.getUserLocation(),getContext());
-            if(allPlaces.get(i).getDistanceToUser()!=null){
-            if(allPlaces.get(i).getDistanceToUser()<radius)
-            {
-                nearPlaces.add(allPlaces.get(i));
+        Location userLoaction=MyLocationListener.getUserLocation();
+        if(userLoaction!=null) {
+            for (int i = 0; i < allPlaces.size(); i++) {
+                allPlaces.get(i).setDistanceToUser(userLoaction, getContext(),currectCity.getName());
+                if (allPlaces.get(i).getDistanceToUser() != null) {
+                    if (allPlaces.get(i).getDistanceToUser() < radius) {
+                        nearPlaces.add(allPlaces.get(i));
+                    }
+                }
             }
-        }
-        }
+            if(!nearPlaces.isEmpty())
+            {
+                Collections.sort(nearPlaces,PlaceMain.COMPARATOR_BY_DISTANCE_TO_USER);
+            }
+        }else
+            {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast toastError=Toast.makeText(getActivity(),"Не вдалося знайти ваше місцезнаходження. Включіть GPS",Toast.LENGTH_LONG);
+                        toastError.show();
+                    }
+                });
+            }
     }
 }

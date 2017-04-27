@@ -3,6 +3,7 @@ package com.vovatkach2427gmail.ukrainetravel.Fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.*;
 
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.vovatkach2427gmail.ukrainetravel.Adapter.RVAdapterNearPlaceList;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
+import com.vovatkach2427gmail.ukrainetravel.Model.City;
 import com.vovatkach2427gmail.ukrainetravel.Model.PlaceMain;
 import com.vovatkach2427gmail.ukrainetravel.MyLocationListener;
 import com.vovatkach2427gmail.ukrainetravel.R;
@@ -44,12 +47,16 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
     //-------------
     private int cityId;
     private int radius;
+    private City currectCity;
     private List<PlaceMain> allPlaces;
     private List<PlaceMain> nearPlaces;
+    TextView tvNotNearPlaces;
+    Button btnError;
     //-------------
     MapView mapView;
     private GoogleMap mMap;
     DilatingDotsProgressBar progressBar;
+    Location userLocation;
 
     //-----конструктор
     public static FragmentMapNearPlace newInstance(int idCity, int radius) {
@@ -66,6 +73,7 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
         super.onCreate(savedInstanceState);
         cityId =getArguments().getInt(ARG_ID_CITY,1);
         radius =getArguments().getInt(ARG_RADIUS,500);
+        userLocation=MyLocationListener.getUserLocation();
     }
 
 
@@ -74,6 +82,8 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fragment_map_near_place, container, false);
+        tvNotNearPlaces=(TextView)view.findViewById(R.id.tvMapNearPlaceError);
+        btnError=(Button)view.findViewById(R.id.btnMapNearPlaceError);
         progressBar=(DilatingDotsProgressBar)view.findViewById(R.id.progressNearPlaceMap);
         mapView = (MapView) view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -85,6 +95,17 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
         }
         mapView.getMapAsync(onMapReadyCallback);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        btnError.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                putPlacesOnMap();
+            }
+        });
     }
 
     public void setRadiusAndUpdate(int radius)
@@ -123,6 +144,8 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
                     public void run() {
                         mMap.clear();
                         progressBar.showNow();
+                        tvNotNearPlaces.setVisibility(View.INVISIBLE);
+                        btnError.setVisibility(View.INVISIBLE);
                     }
                 });
                 //-------
@@ -142,6 +165,12 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
                     nearPlaces = new ArrayList<>();
                     //      Log.d("myLog", "створюю близькі");
                 }
+                if (currectCity==null)
+                {
+                    DataBaseWorker dataBaseWorker=new DataBaseWorker(getContext());
+                    currectCity=dataBaseWorker.loadCity(cityId);
+                    dataBaseWorker.close();
+                }
                 //-----
                 //    Log.d("myLog", "шукаю");
                 //------
@@ -150,17 +179,22 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
                     @Override
                     public void run() {
                         progressBar.hideNow();
+                        if(userLocation!=null&&(!nearPlaces.isEmpty())){
                         int zoom=14;
                         if(radius>2000) zoom=12;
-                        LatLng userCoordinates = new LatLng(MyLocationListener.getUserLocation().getLatitude(), MyLocationListener.getUserLocation().getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(userCoordinates).title("Ви").snippet("Ваше місцезнаходження").icon(BitmapDescriptorFactory.fromResource(R.drawable.z_map_user)));
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(userCoordinates).zoom(zoom).build();
-                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                            LatLng userCoordinates = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+                            mMap.addMarker(new MarkerOptions().position(userCoordinates).title("Ви").snippet("Ваше місцезнаходження").icon(BitmapDescriptorFactory.fromResource(R.drawable.z_map_user)));
+                            CameraPosition cameraPosition = new CameraPosition.Builder().target(userCoordinates).zoom(zoom).build();
+                            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                         for(int i=0;i<nearPlaces.size();i++)
                         {
                             LatLng coordinates = new LatLng(nearPlaces.get(i).getCoordinates().latitude, nearPlaces.get(i).getCoordinates().longitude);
                             mMap.addMarker(new MarkerOptions().position(coordinates).title(nearPlaces.get(i).getName()).snippet(nearPlaces.get(i).getAddress()).icon(BitmapDescriptorFactory.fromResource(R.drawable.z_map_place)));
-                        }
+                        }}else
+                            {
+                                tvNotNearPlaces.setVisibility(View.VISIBLE);
+                                btnError.setVisibility(View.VISIBLE);
+                            }
                     }
                 });
             }
@@ -174,13 +208,13 @@ public class FragmentMapNearPlace extends FragmentNearPlace {
         {
             nearPlaces.clear();
         }
-        for (int i=0;i<allPlaces.size();i++)
-        {
-            allPlaces.get(i).setDistanceToUser(MyLocationListener.getUserLocation(),getContext());
-            if(allPlaces.get(i).getDistanceToUser()!=null){
-                if(allPlaces.get(i).getDistanceToUser()<radius)
-                {
-                    nearPlaces.add(allPlaces.get(i));
+        if(userLocation!=null) {
+            for (int i = 0; i < allPlaces.size(); i++) {
+                allPlaces.get(i).setDistanceToUser(userLocation, getContext(),currectCity.getName());
+                if (allPlaces.get(i).getDistanceToUser() != null) {
+                    if (allPlaces.get(i).getDistanceToUser() < radius) {
+                        nearPlaces.add(allPlaces.get(i));
+                    }
                 }
             }
         }

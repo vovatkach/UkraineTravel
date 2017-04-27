@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.vovatkach2427gmail.ukrainetravel.Act.WeatherAct"
+    tools:showIn="@layout/weather_act">
+ <android.support.v7.widget.RecyclerView
+     android:id="@+id/rvWeather"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+ </android.support.v7.widget.RecyclerView>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+ <TextView
+     android:id="@+id/tv_is_not_weather"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_margin="15dp"
+     android:text="Не вдалося загрузити погоду. Перевірте інтернет зєднання"
+     android:textAlignment="center"
+     android:textColor="@color/colorAccent"
+     android:textSize="18dp"
+     android:textStyle="bold"
+     android:visibility="invisible" />
+
+ <Button
+     android:id="@+id/btnWeatherError"
+     style="@style/Widget.AppCompat.Button.Colored"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center"
+     android:text="Оновити"
+     android:visibility="invisible" />
+</LinearLayout>
+  <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
+      android:id="@+id/progressWeather"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:radius="5dp"
+      android:color="@color/colorWhite"
+      app:dd_numDots="4"
+      app:dd_scaleMultiplier="1.5"
+      app:dd_animationDuration="500"
+      app:dd_horizontalSpacing="4dp"
+      />
+ </FrameLayout>

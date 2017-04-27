@@ -35,5 +35,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.github.justzak:dilatingdotsprogressbar:1.0.1'
     compile 'com.google.android.gms:play-services:10.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     testCompile 'junit:junit:4.12'
 }

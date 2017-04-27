@@ -118,4 +118,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="not_places">Місць не знайдено</string>
+    <string name="title_activity_weather">WeatherAct</string>
+    <string name="weather_key_api">7e151b317892bb5d10839712a8f5069a</string>
+
 </resources>

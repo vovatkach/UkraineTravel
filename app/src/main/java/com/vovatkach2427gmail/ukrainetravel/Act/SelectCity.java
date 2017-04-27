@@ -1,28 +1,31 @@
 package com.vovatkach2427gmail.ukrainetravel.Act;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Location;
-import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.vovatkach2427gmail.ukrainetravel.Adapter.RVAdapterSelectCity;
 import com.vovatkach2427gmail.ukrainetravel.DB.DataBaseWorker;
 import com.vovatkach2427gmail.ukrainetravel.Model.City;
+import com.vovatkach2427gmail.ukrainetravel.Model.ModelWeatherFromApi.WeatherFromApi;
+import com.vovatkach2427gmail.ukrainetravel.Model.MyWeather;
 import com.vovatkach2427gmail.ukrainetravel.MyLocationListener;
 import com.vovatkach2427gmail.ukrainetravel.R;
+import com.vovatkach2427gmail.ukrainetravel.Retrofit.RequestWeather;
+import com.vovatkach2427gmail.ukrainetravel.Retrofit.WeatherConverter;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+
+import static com.vovatkach2427gmail.ukrainetravel.Retrofit.RequestWeather.getWeather;
+import static com.vovatkach2427gmail.ukrainetravel.Retrofit.WeatherConverter.fromWeatherApiToMyWeather;
 
 public class SelectCity extends AppCompatActivity {
     RecyclerView rvCities;
@@ -63,6 +66,8 @@ public class SelectCity extends AppCompatActivity {
         super.onResume();
         rvCities.setLayoutManager(layoutManager);
         rvCities.setAdapter(rvAdapterSelectCity);
+        RequestWeather.ClearSaveWeather();
+
     }
 }
 

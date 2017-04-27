@@ -88,9 +88,6 @@ public class MainAct extends AppCompatActivity
 
         switch (id)
         {
-            case R.id.nav_exit:
-                finishAffinity();
-                break;
             case R.id.nav_select_city:
                 Intent intentGoSelectCity=new Intent(MainAct.this,SelectCity.class);
                 startActivity(intentGoSelectCity);
@@ -104,6 +101,11 @@ public class MainAct extends AppCompatActivity
             case R.id.nav_near_places:
                 Intent intentGoToNearPlace=new Intent(MainAct.this,NearPlaceAct.class);
                 startActivity(intentGoToNearPlace);
+                overridePendingTransition(R.anim.in_left,R.anim.out_right);
+                break;
+            case R.id.nav_weather:
+                Intent intentGoToWeather=new Intent(MainAct.this,WeatherAct.class);
+                startActivity(intentGoToWeather);
                 overridePendingTransition(R.anim.in_left,R.anim.out_right);
                 break;
         }

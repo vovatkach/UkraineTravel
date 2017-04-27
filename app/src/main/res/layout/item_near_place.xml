@@ -45,12 +45,11 @@
                     android:id="@+id/tv_place_type_card_place_near_act"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="1.0"
-                    android:padding="@dimen/paddingCardViewCity"
+                    android:alpha="0.6"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:typeface="serif"
-                    android:textColor="@color/colorBlueGrey100" />
+                    android:textColor="@color/colorBlack" />
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_place_distance_card_place_near_act"
