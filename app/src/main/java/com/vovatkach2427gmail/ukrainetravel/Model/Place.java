@@ -12,14 +12,13 @@ public class Place {
     private String Website;
     private String Phone;
     private String Audio;
-    private String Coordinates;
     private String Addrres;
     private String HoursOFWork;
     private String Description;
     private int Rating;
     private int Id_City;
     private int IsTOP;
-    public Place(int id, String name, String type, int[] imgs, String website, String phone, String audio, String coordinates, String addrres, String hoursOFWork, String description, int rating, int id_city, int isTOP)
+    public Place(int id, String name, String type, int[] imgs, String website, String phone, String audio, String addrres, String hoursOFWork, String description, int rating, int id_city, int isTOP)
     {
         Id = id;
         Name = name;
@@ -29,7 +28,6 @@ public class Place {
         Phone = phone;
         Audio = audio;
 
-        Coordinates = coordinates;
         Addrres = addrres;
         HoursOFWork = hoursOFWork;
         Description = description;
@@ -67,9 +65,6 @@ public class Place {
         return Audio;
     }
 
-    public String getCoordinates() {
-        return Coordinates;
-    }
 
     public String getAddrres() {
         return Addrres;

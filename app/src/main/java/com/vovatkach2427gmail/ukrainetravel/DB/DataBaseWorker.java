@@ -142,14 +142,14 @@ public class DataBaseWorker {
             int TopColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.TOP);
             int AddressColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ADDRESS);
             int AudioColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.AUDIO);
-            int CoordinatesColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.COORDINATES);
+          //  int CoordinatesColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.COORDINATES);
             int DescriptionColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.DESCRIPTION);
             int HoursOfWorkColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.HOURS_OF_WORK);
             int CityIdColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.ID_CITY);
             int PhoneColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.PHONE);
             int RatingColIndex=cursor.getColumnIndex(Contact.TABLE_PLACE.RATING);
-            currectPlace=new Place(cursor.getInt(idColIndex),cursor.getString(NameColIndex),cursor.getString(TypeColIndex),jsonToImgs(cursor.getString(PicturesColIndex)),cursor.getString(WebsiteColIndex),cursor.getString(PhoneColIndex),cursor.getString(AudioColIndex),cursor.getString(CoordinatesColIndex),cursor.getString(AddressColIndex),cursor.getString(HoursOfWorkColIndex),cursor.getString(DescriptionColIndex),cursor.getInt(RatingColIndex),cursor.getInt(CityIdColIndex),cursor.getInt(TopColIndex));
-        }else currectPlace=new Place(1,"place","", new int[]{}, "", "", "", "", "", "", "",1,1,1);
+            currectPlace=new Place(cursor.getInt(idColIndex),cursor.getString(NameColIndex),cursor.getString(TypeColIndex),jsonToImgs(cursor.getString(PicturesColIndex)),cursor.getString(WebsiteColIndex),cursor.getString(PhoneColIndex),cursor.getString(AudioColIndex),cursor.getString(AddressColIndex),cursor.getString(HoursOfWorkColIndex),cursor.getString(DescriptionColIndex),cursor.getInt(RatingColIndex),cursor.getInt(CityIdColIndex),cursor.getInt(TopColIndex));
+        }else currectPlace=new Place(1,"place","", new int[]{}, "", "", "", "", "", "",1,1,1);
         return currectPlace;
     }
     //------------------методи для налаштування
