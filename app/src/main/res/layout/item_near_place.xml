@@ -9,21 +9,21 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cv_place_near_act"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/iv_img_card_place_near_act"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:alpha="0.8"
-                android:scaleType="fitStart"
+                android:alpha="1.0"
+                android:scaleType="fitXY"
                />
 
             <LinearLayout
@@ -40,16 +40,15 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorAccent" />
                 <TextView
                     android:id="@+id/tv_place_type_card_place_near_act"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.6"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:typeface="serif"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_place_distance_card_place_near_act"

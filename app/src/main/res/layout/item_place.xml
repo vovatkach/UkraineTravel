@@ -9,21 +9,21 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cvPlace"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/ivImgCardPlace"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:alpha="0.8"
-                android:scaleType="fitStart" />
+                android:alpha="1.0"
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/tvPlaceNameCardPlace"

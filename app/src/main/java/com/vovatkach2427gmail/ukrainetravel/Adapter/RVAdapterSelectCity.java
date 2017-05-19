@@ -56,9 +56,11 @@ public class RVAdapterSelectCity extends RecyclerView.Adapter<RVAdapterSelectCit
     @Override
     public void onBindViewHolder(CityViewHolder holder, final int position) {
         //-------------------------------------
+        /*
         if(position==0) {
         holder.tvCityName.setTextColor(activity.getResources().getColor(R.color.colorAccent));
         }else {holder.tvCityName.setTextColor(activity.getResources().getColor(R.color.colorWhite));}
+        */
         //------------------------------------------
         holder.imgCity.setImageResource(cities.get(position).getImgs()[0]);
         holder.tvCityName.setText(cities.get(position).getName());

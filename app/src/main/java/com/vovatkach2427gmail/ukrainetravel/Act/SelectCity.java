@@ -46,8 +46,9 @@ public class SelectCity extends AppCompatActivity {
         dataBaseWorker = new DataBaseWorker(SelectCity.this);
         cities = dataBaseWorker.loadCities();
         dataBaseWorker.close();
-        // Log.d("myLog",DataBaseWorker.imgsToJson(new int[]{R.drawable.lviv_img_1,R.drawable.lviv_img_2,R.drawable.lviv_img_3}));
-        // Log.d("myLog",DataBaseWorker.imgsToJson(new int[]{R.drawable.v_img_place_1,R.drawable.v_img_place_2,R.drawable.v_img_place_3}));
+        //--------------------------------------------------------------------------------------
+        Log.d("myLog","1  "+DataBaseWorker.imgsToJson(new int[]{R.drawable.place3_2,R.drawable.place3_1,R.drawable.place3}));
+
         //----перевірка чи можна сортувати
         if(locationUser!=null)
         {

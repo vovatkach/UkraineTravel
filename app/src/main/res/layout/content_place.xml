@@ -22,7 +22,7 @@
          <com.synnapps.carouselview.CarouselView
              android:id="@+id/carousel_view_item_place_act"
              android:layout_width="match_parent"
-             android:layout_height="230dp"
+             android:layout_height="210dp"
              app:fillColor="#FFFFFFFF"
              app:pageColor="#00000000"
              app:radius="6dp"
