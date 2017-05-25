@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:radius="5dp"
-        android:color="@color/colorWhite"
+        android:color="@color/colorAccent"
         app:dd_numDots="4"
         app:dd_scaleMultiplier="1.5"
         app:dd_animationDuration="500"

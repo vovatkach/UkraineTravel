@@ -8,6 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 /**
@@ -15,21 +16,29 @@ import android.widget.Toast;
  */
 
 public class MyLocationListener implements LocationListener {
-    private static Location userLocation=null;
+    private static Location userLocation = null;
+
     public static void SetUpLocationListener(Context context) {
         LocationManager locationManager = (LocationManager)
                 context.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new MyLocationListener();
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast toastError=Toast.makeText(context,"Не вдалося получити дані про ваше місцезнаходження.\n Виключіть GPS.",Toast.LENGTH_SHORT);
-            toastError.show();
         }
         locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
+                LocationManager.NETWORK_PROVIDER,
                 5000,
                 100,
                 locationListener);
-        userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        userLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (userLocation == null) {
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    5000,
+                    100,
+                    locationListener);
+            userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
     }
 
     public static Location getUserLocation() {
@@ -37,8 +46,8 @@ public class MyLocationListener implements LocationListener {
     }
 
     @Override
-    public  void onLocationChanged(Location location) {
-        userLocation=location;
+    public void onLocationChanged(Location location) {
+        userLocation = location;
     }
 
     @Override
