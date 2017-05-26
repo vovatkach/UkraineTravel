@@ -2,6 +2,7 @@ package com.vovatkach2427gmail.ukrainetravel.Act;
 
 import android.location.Location;
 import android.location.LocationListener;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +41,7 @@ public class SelectCity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_city_act);
+      //  MultiDex.install(this);
         locationUser= MyLocationListener.getUserLocation();
         rvCities = (RecyclerView) findViewById(R.id.rvSelectCity);
         rvCities.setHasFixedSize(true);

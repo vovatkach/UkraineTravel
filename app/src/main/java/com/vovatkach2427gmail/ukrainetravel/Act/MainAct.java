@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -38,6 +39,7 @@ public class MainAct extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_act);
+      //  MultiDex.install(this);
         ////----зчитування яке місто було вибрано
         SharedPreferences preferences = getSharedPreferences("work", MODE_PRIVATE);
         id_city = preferences.getInt("city_id", 1);

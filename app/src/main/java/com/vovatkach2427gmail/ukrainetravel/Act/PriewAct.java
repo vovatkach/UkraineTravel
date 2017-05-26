@@ -23,12 +23,10 @@ public class PriewAct extends AppCompatActivity {
     CheckBox cbNotShow;
     int [] imgs=
             {
-            R.drawable.priew_act_carosel_img1,
-            R.drawable.priew_act_carosel_img2,
-            R.drawable.priew_act_carosel_img3,
-            R.drawable.priew_act_carosel_img4,
-            R.drawable.priew_act_carosel_img5,
-            R.drawable.priew_act_carosel_img6,
+          R.drawable.z_carousel_1_min,
+          R.drawable.z_carousel_2_min,
+          R.drawable.z_carousel_5_min,
+          R.drawable.z_carousel_6_min
             };
 
     @Override
@@ -36,14 +34,6 @@ public class PriewAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.priew_act);
         carouselView=(CarouselView)findViewById(R.id.cvPriewAct);
-        carouselView.setPageCount(imgs.length);
-        carouselView.setImageListener(new ImageListener() {
-            @Override
-            public void setImageForPosition(int position, ImageView imageView) {
-                imageView.setImageResource(imgs[position]);
-            }
-        });
-
         btn_go_to_select_city=(Button)findViewById(R.id.btn_go_to_select_city);
         cbNotShow=(CheckBox)findViewById(R.id.cb_not_to_show);
     }
@@ -51,6 +41,13 @@ public class PriewAct extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        carouselView.setPageCount(imgs.length);
+        carouselView.setImageListener(new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(imgs[position]);
+            }
+        });
         btn_go_to_select_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
