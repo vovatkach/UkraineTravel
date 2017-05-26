@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.multidex.MultiDex;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -51,12 +50,6 @@ public class MainAct extends AppCompatActivity
         CarouselView carouselViewCity=(CarouselView)findViewById(R.id.caroselViewCity);
         carouselViewCity.setPageCount(currectCity.getImgs().length);
         carouselViewCity.setImageListener(imageListenerCarouselViewCity);
-        //--------ініціалізація view pager і TabsLayout
-        ViewPager viewPagerMain=(ViewPager)findViewById(R.id.viewpager_main);
-        viewPagerMain.setAdapter(new ViewPagerMainAdapter(getSupportFragmentManager(),MainAct.this,id_city));
-        //-----
-        TabLayout tabLayoutMain=(TabLayout)findViewById(R.id.tabs_layout_main);
-        tabLayoutMain.setupWithViewPager(viewPagerMain);
         //-------пошук елементів
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,6 +71,16 @@ public class MainAct extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //--------ініціалізація view pager і TabsLayout
+        ViewPager viewPagerMain=(ViewPager)findViewById(R.id.viewpager_main);
+        viewPagerMain.setAdapter(new ViewPagerMainAdapter(getSupportFragmentManager(),MainAct.this,id_city));
+        //-----
+        TabLayout tabLayoutMain=(TabLayout)findViewById(R.id.tabs_layout_main);
+        tabLayoutMain.setupWithViewPager(viewPagerMain);
+    }
 
     @Override
     public void onBackPressed() {
