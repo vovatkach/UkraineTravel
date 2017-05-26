@@ -60,7 +60,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:typeface="serif"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorWhite"
                 android:layout_margin="4dp" />
             <ImageView
                 android:id="@+id/iv_place_is_top_near_act"

@@ -29,7 +29,7 @@
         android:text="@string/btn_go_to_select_city"
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
-        android:alpha="0.5"
+        android:alpha="0.8"
         android:textStyle="bold" />
 
     <LinearLayout
